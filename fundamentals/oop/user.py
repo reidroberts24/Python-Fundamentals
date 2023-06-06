@@ -9,6 +9,7 @@ class User:
     
     def display_info(self):
         print(f"First Name: {self.first_name}\nLast Name: {self.last_name}\nEmail: {self.email}\nAge: {self.age}\nIs Rewards Member: {self.is_rewards_member}\nGold Card Points: {self.gold_card_points}")
+        return self
     
     def enroll(self):
         if self.is_rewards_member == True:
@@ -18,7 +19,7 @@ class User:
             self.is_rewards_member = True
             self.gold_card_points += 200
             print(f"{self.first_name} is now a member and has been awarded {self.gold_card_points} gold card points.")
-            return True
+            return self
     
     def spend_points(self, amount):
         if amount > self.gold_card_points:
@@ -27,18 +28,14 @@ class User:
         else:
             self.gold_card_points -= amount
             print(f"{self.first_name} spent {amount} points. {self.first_name} now has {self.gold_card_points} gold card points remaining.")
-            return True
+            return self
         
 
 user1 = User("Michael", "Jordan", "mj@gmail.com", 48)
-user1.enroll()
+user1.enroll().spend_points(50).display_info().enroll()
+
 user2 = User("Alex", "Bregman", "goat@gmail.com", 27)
+user2.enroll().spend_points(80).display_info()
+
 user3 = User("Erling", "Haaland", "strikerone@gmail.com", 28)
-user1.spend_points(50)
-user2.enroll()
-user2.spend_points(80)
-user1.display_info()
-user2.display_info()
-user3.display_info()
-user1.enroll()
-user3.spend_points(40)
+user3.display_info().spend_points(40)
