@@ -35,41 +35,40 @@ class User:
     def __init__(self, name, email):
         self.name = name
         self.email = email
-        self.accounts = []
-        self.add_account()
+        self.accounts = [] #empty list to hold all active user accounts
+        self.add_account() #call add_account() method upon a new user instantiation
 
     def add_account(self):
-        account = BankAccount(int_rate=0.02, balance=0)
-        self.accounts.append(account)
+        account = BankAccount(int_rate=0.02, balance=0) #create new default account when user decides to add an account
+        self.accounts.append(account) #add new account to the list of user's acounts
         return self
     
     def make_deposit(self, acct_index, amount):
-        if 0 <= acct_index and acct_index < len(self.accounts):
-            
-            self.accounts[acct_index].deposit(amount)
+        if 0 <= acct_index and acct_index < len(self.accounts): #check that the given index is valid
+            self.accounts[acct_index].deposit(amount)  #deposit amount from account at given index
         else:
             print("Invalid account index.")
         return self
     
     def make_withdrawal(self, acct_index, amount):
-        if 0 <= acct_index < len(self.accounts):
-            self.accounts[acct_index].withdraw(amount)
+        if 0 <= acct_index < len(self.accounts): #check that the given index is valid
+            self.accounts[acct_index].withdraw(amount) #withdraw amount from account at given index
         else:
             print("Invalid account index.")
         return self
     
     def display_user_balance(self, acct_index):
-        if 0 <= acct_index < len(self.accounts):
-            self.accounts[acct_index].display_account_info()
+        if 0 <= acct_index < len(self.accounts): #check that the given index is valid
+            self.accounts[acct_index].display_account_info() #display account info at given index
         else:
             print("Invalid account index.")
         return self
     
     def transfer_money(self, amount, other_user): 
         self.make_withdrawal(0,amount)
-        print(f"${amount} successfully withdrawn from {self.name}'s primary account.")
+        print(f"${amount} successfully withdrawn from {self.name}'s primary account.")  # withdrawing into account at first index
         other_user.make_deposit(0,amount)
-        print(f"${amount} successfully deposited into {other_user.name}'s primary account.")
+        print(f"${amount} successfully deposited into {other_user.name}'s primary account.") # depositing into account at first index
         print("Transaction completed successfully.")
         return self
 
