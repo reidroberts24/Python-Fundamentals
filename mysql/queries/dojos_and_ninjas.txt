@@ -1,0 +1,104 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema dojos_and_ninjas
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema dojos_and_ninjas
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `dojos_and_ninjas` DEFAULT CHARACTER SET utf8 ;
+USE `dojos_and_ninjas` ;
+
+-- -----------------------------------------------------
+-- Table `dojos_and_ninjas`.`users`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `dojos_and_ninjas`.`users` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `first_name` VARCHAR(45) NULL,
+  `last_name` VARCHAR(45) NULL,
+  `email` VARCHAR(100) NULL,
+  `created_at` DATETIME NULL,
+  `updated_at` DATETIME NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `dojos_and_ninjas`.`dojos`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `dojos_and_ninjas`.`dojos` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(100) NULL,
+  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `dojos_and_ninjas`.`ninjas`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `dojos_and_ninjas`.`ninjas` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `first_name` VARCHAR(45) NULL,
+  `last_name` VARCHAR(45) NULL,
+  `age` INT NULL,
+  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `dojo_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_ninjas_dojos_idx` (`dojo_id` ASC) VISIBLE,
+  CONSTRAINT `fk_ninjas_dojos`
+    FOREIGN KEY (`dojo_id`)
+    REFERENCES `dojos_and_ninjas`.`dojos` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
+INSERT INTO `dojos_and_ninjas`.`dojos` (`id`, `name`) VALUES ('1', 'Austin');
+INSERT INTO `dojos_and_ninjas`.`dojos` (`id`, `name`) VALUES ('2', 'Chicago');
+INSERT INTO `dojos_and_ninjas`.`dojos` (`id`, `name`) VALUES ('3', 'Online Remote');
+
+
+SELECT * FROM dojos;
+
+DELETE FROM `dojos_and_ninjas`.`dojos` WHERE (`id` = '1');
+DELETE FROM `dojos_and_ninjas`.`dojos` WHERE (`id` = '2');
+DELETE FROM `dojos_and_ninjas`.`dojos` WHERE (`id` = '3');
+
+INSERT INTO `dojos_and_ninjas`.`dojos` (`id`, `name`) VALUES ('1', 'New York');
+INSERT INTO `dojos_and_ninjas`.`dojos` (`id`, `name`) VALUES ('2', 'Seattle');
+INSERT INTO `dojos_and_ninjas`.`dojos` (`id`, `name`) VALUES ('3', 'Dallas');
+
+
+SELECT * FROM dojos;
+
+SELECT * FROM ninjas;
+
+INSERT INTO `dojos_and_ninjas`.`ninjas` (`id`, `first_name`, `last_name`, `age`, `dojo_id`) VALUES ('1', 'Sofia', 'Martinez', '28', '1');
+INSERT INTO `dojos_and_ninjas`.`ninjas` (`id`, `first_name`, `last_name`, `age`, `dojo_id`) VALUES ('2', 'Ethan', 'Thompson', '34', '1');
+INSERT INTO `dojos_and_ninjas`.`ninjas` (`id`, `first_name`, `last_name`, `age`, `dojo_id`) VALUES ('3', 'Natalie', 'Kim', '47', '1');
+INSERT INTO `dojos_and_ninjas`.`ninjas` (`id`, `first_name`, `last_name`, `age`, `dojo_id`) VALUES ('4', 'Connor', 'Sullivan', '19', '2');
+INSERT INTO `dojos_and_ninjas`.`ninjas` (`id`, `first_name`, `last_name`, `age`, `dojo_id`) VALUES ('5', 'Jake', 'Ramirez', '23', '2');
+INSERT INTO `dojos_and_ninjas`.`ninjas` (`id`, `first_name`, `last_name`, `age`, `dojo_id`) VALUES ('6', 'Laura', 'Wilson', '27', '2');
+INSERT INTO `dojos_and_ninjas`.`ninjas` (`id`, `first_name`, `last_name`, `age`, `dojo_id`) VALUES ('7', 'Mary', 'Poppins', '36', '3');
+INSERT INTO `dojos_and_ninjas`.`ninjas` (`id`, `first_name`, `last_name`, `age`, `dojo_id`) VALUES ('8', 'Jackie', 'Chan', '54', '3');
+INSERT INTO `dojos_and_ninjas`.`ninjas` (`id`, `first_name`, `last_name`, `age`, `dojo_id`) VALUES ('9', 'Marilyn', 'Monroe', '29', '3');
+
+SELECT * FROM ninjas WHERE dojo_id = 1;
+SELECT * FROM ninjas WHERE dojo_id = 3;
+
+SELECT dojo_id FROM ninjas 
+ORDER BY id DESC 
+LIMIT 1;
