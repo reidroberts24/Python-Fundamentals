@@ -1,0 +1,49 @@
+INSERT INTO `friends_schema`.`users` (`id`, `first_name`, `last_name`) VALUES ('1', 'Amy', 'Giver');
+INSERT INTO `friends_schema`.`users` (`id`, `first_name`, `last_name`) VALUES ('2', 'Eli', 'Byers');
+INSERT INTO `friends_schema`.`users` (`id`, `first_name`, `last_name`) VALUES ('3', 'Marky', 'Mark');
+INSERT INTO `friends_schema`.`users` (`id`, `first_name`, `last_name`) VALUES ('4', 'Big', 'Bird');
+INSERT INTO `friends_schema`.`users` (`id`, `first_name`, `last_name`) VALUES ('5', 'Kermit', 'The Frog');
+INSERT INTO `friends_schema`.`users` (`id`, `first_name`, `last_name`) VALUES ('6', 'Mickey', 'Mouse');
+
+
+INSERT INTO `friends_schema`.`friendships` (`id`, `friend_id`, `user_id`) VALUES ('3', '6', '1');
+INSERT INTO `friends_schema`.`friendships` (`id`, `friend_id`, `user_id`) VALUES ('4', '1', '2');
+INSERT INTO `friends_schema`.`friendships` (`id`, `friend_id`, `user_id`) VALUES ('5', '3', '2');
+INSERT INTO `friends_schema`.`friendships` (`id`, `friend_id`, `user_id`) VALUES ('6', '5', '2');
+INSERT INTO `friends_schema`.`friendships` (`id`, `friend_id`, `user_id`) VALUES ('7', '2', '3');
+INSERT INTO `friends_schema`.`friendships` (`id`, `friend_id`, `user_id`) VALUES ('8', '5', '3');
+UPDATE `friends_schema`.`friendships` SET `id` = '1' WHERE (`id` = '1');
+UPDATE `friends_schema`.`friendships` SET `id` = '2' WHERE (`id` = '2');
+INSERT INTO `friends_schema`.`friendships` (`id`, `friend_id`, `user_id`) VALUES ('9', '3', '4');
+INSERT INTO `friends_schema`.`friendships` (`id`, `friend_id`, `user_id`) VALUES ('10', '1', '5');
+INSERT INTO `friends_schema`.`friendships` (`id`, `friend_id`, `user_id`) VALUES ('11', '6', '5');
+INSERT INTO `friends_schema`.`friendships` (`id`, `friend_id`, `user_id`) VALUES ('12', '2', '6');
+INSERT INTO `friends_schema`.`friendships` (`id`, `friend_id`, `user_id`) VALUES ('13', '3', '6');
+
+SELECT users.first_name, users.last_name, user2.first_name as friend_first_name, user2.last_name as friend_last_name 
+FROM users 
+JOIN friendships ON users.id = friendships.user_id
+LEFT JOIN users as user2 ON user2.id = friendships.friend_id;
+
+
+SELECT users.first_name, users.last_name, users.id as user_id, user2.first_name as friend_first_name, 
+user2.id as friend_id
+FROM users 
+JOIN friendships ON users.id = friendships.user_id
+LEFT JOIN users as user2 ON user2.id = friendships.friend_id
+WHERE friendships.friend_id = 1;
+
+SELECT COUNT(*) as total_friendships
+FROM friendships;
+
+SELECT user_id, COUNT(*) as most_friendships
+FROM friendships
+GROUP BY user_id
+ORDER BY most_friendships DESC
+LIMIT 1;
+
+
+SELECT users.first_name, users.last_name
+FROM users JOIN friendships ON users.id = friendships.friend_id
+WHERE friendships.user_id = 3
+ORDER BY users.first_name, users.last_name;
