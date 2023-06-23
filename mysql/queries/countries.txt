@@ -10,7 +10,8 @@ Query #2:
 SELECT country.name, COUNT(*) as number_of_cities
 FROM city LEFT JOIN country
 ON country.Code = city.CountryCode
-GROUP BY country.name;
+GROUP BY country.name
+ORDER BY number_of_cities DESC;
 
 Query #3:
 SELECT city.Name, city.Population
@@ -41,4 +42,5 @@ WHERE city.District = 'Buenos Aires' AND city.Population > 500000;
 
 Query #8;
 SELECT c.Region as Region, COUNT(*) as Number_of_Countries 
-FROM country c GROUP BY c.Region;
+FROM country c GROUP BY c.Region
+ORDER BY Number_of_Countries DESC;
