@@ -1,12 +1,13 @@
 from flask import Flask, render_template
 app = Flask(__name__)
 
+rows = 8
+cols = 8
+
 @app.route('/')
 def index():
     return render_template('index.html', rows=rows, cols=cols)
 
-rows = 8
-cols = 8
 @app.route('/<int:rows>')
 def define_rows(rows):
     rows = rows
