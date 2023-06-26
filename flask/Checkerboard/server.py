@@ -3,14 +3,13 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    rows = 8
-    cols = 8
     return render_template('index.html', rows=rows, cols=cols)
 
+rows = 8
+cols = 8
 @app.route('/<int:rows>')
 def define_rows(rows):
     rows = rows
-    cols = 8
     return render_template('index.html', rows=rows, cols=cols)
 
 @app.route('/<int:rows>/<int:cols>')
