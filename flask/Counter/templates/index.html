@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+    <title>Counter</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <h1 class="title text-center">Counter</h1>
+        <div class="d-flex justify-content-center mt-3 p-2">
+            <ul class="list-group"> 
+                <li class="list-group-item text-center ">Count: {{ count }}</li>
+                <li class="list-group-item active text-center" aria-current="true">Times actually visited: {{ visits }}</li>
+            </ul>
+        </div>
+        <div class="d-flex justify-content-center mt-3 p-2">
+            <form action='{{url_for('increment')}}' method="post">
+                <button class="btn btn-primary mr-4" type="submit">Click</button>
+            </form>
+            <form action="{{url_for('destroy_session')}}" method="post">
+                <button class="btn btn-danger ml-4" type="submit">Reset</button>
+            </form>
+        </div>
+
+        <div class="d-flex justify-content-center mt-3 p-2">
+            <form action="{{url_for('add_two')}}" method="post">
+                <button class="btn btn-primary" type="submit">Add Two!</button>
+            </form>
+        </div>
+        <div class="d-flex justify-content-center mt-3 p-2">
+            <form action="{{url_for('specify_times')}}", method="post">
+                <div class="input-group">
+                    <input type="number" name="specify_times" class="form-control" placeholder="Select number">
+                    <div class="input-group-append">
+                        <button class="btn btn-secondary" type="submit">Add amount</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
