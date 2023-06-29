@@ -14,7 +14,7 @@
             <div class="d-flex justify-content-center">
                 <div class="card bg-danger w-50 text-warning">
                     <div class="card-body">
-                    <h5 class="card-title text-center">Wrong!</h5>
+                    <h5 class="card-title text-center">{{ hint }}</h5>
                     <p class="card-text text-center">Keep guessing!</p>
                     <div class="d-flex justify-content-center">
                         <form class="input-group mb-3" action="{{url_for('guess')}}" method="post">
