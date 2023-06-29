@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <title>Dojo Survey</title>
+</head>
+<body>
+    <div class="d-flex justify-content-center">
+        <div class="card text-white bg-dark mb-3 mt-5 w-25" >
+            <h3 class="card-header text-warning">Dojo Survey</h3>
+            <div class="card-body">
+
+                <!-- wrap all of the inputs and selections with the form -->
+                <form action="{{url_for('process')}}" method="post">
+                    
+                    <!-- name input -->
+                    <label for="inputName">Name:</label>
+                    <input name="student_name" type="name" class="form-control" id="inputName" aria-describedby="emailHelp" placeholder="Enter name">
+
+                    <!-- location options with select menu -->
+                    <label class="mt-2" for="inputLocation">Location:</label>
+                    <select name="dojo_location" class="form-control form-control-sm" id="inputLocation">
+                        <option>Online</option>
+                        <option>Austin</option>
+                        <option>Chicago</option>
+                        <option>Seattle</option>
+                        <option>Burbank</option>
+                        <option>Bellevue</option>
+
+                    </select>
+
+                    <!-- fave language options with select menu -->
+                    <label class="mt-2" for="faveLanguage">Location:</label>
+                    <select name="fave_language" class="form-control form-control-sm" id="faveLanguage">
+                        <option>Python</option>
+                        <option>Java</option>
+                        <option>JavaScript</option>
+                        <option>C</option>
+                        <option>C#</option>
+                        <option>C++</option>
+                    </select>
+
+                    <label class="mt-2" for="commentsBox">Comments:</label>
+                    <textarea name="comments" class="form-control" id="commentsBox" rows="4"></textarea>
+                    
+                    <!-- giving all the checkboxes the same name for the form -->
+                    <!-- will use getList method to get the values for the result cards -->
+                    
+                    <label class="mt-2">Favorite Coding Topics:</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="topics" value="Data Structures and Algorithms" id="check1">
+                        <label class="form-check-label" for="check1">Data Structures and Algorithms</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="topics" value="Backend Development" id="check2">
+                        <label class="form-check-label" for="check2">Backend Development</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="topics" value="Frontend Development" id="check3">
+                        <label class="form-check-label" for="check3">Frontend Development</label>
+                    </div>
+                    
+
+                    <!-- radio buttons -->
+                    <label class="mt-2">Experience Level:</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="beginner" name="experience" value="Beginner">
+                        <label class="form-check-label" for="beginner">Beginner</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="intermediate" name="experience" value="Intermediate">
+                        <label class="form-check-label" for="intermediate">Intermediate</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="advanced" name="experience" value="Advanced">
+                        <label class="form-check-label" for="advanced">Advanced</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="expert" name="experience" value="Expert">
+                        <label class="form-check-label" for="expert">Expert</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-2">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

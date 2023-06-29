@@ -1,0 +1,35 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <title>Dojo Survey</title>
+</head>
+
+<body>
+    <div class="d-flex justify-content-center">
+        <div class="card text-white bg-dark mb-3 mt-5 w-25" >
+            <div class="card-header bg-dark text-warning border-white">
+                <h3>{{ stu_name }}</h2>
+            </div>
+            <div class="card-body border-white">
+                <p class="card-text"><u>Dojo Location:</u> {{ location }}</p>
+                <p class="card-text"><u>Favorite Language:</u> {{ fave_lang }}</p>
+                <p class="card-text"><u>Comments:</u> {{ comments }}</p>
+                <p class="card-text"><u>Favorite Topics:</u> {{ fave_topics }}</p>
+                <p class="card-text"><u>Experience Level:</u> {{ experience }}</p>
+            </div>
+            <div class="card-footer border-white text-white">
+                <form action="{{url_for('index')}}" method="post">
+                    <button class="btn btn-primary" type="submit">Home</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
