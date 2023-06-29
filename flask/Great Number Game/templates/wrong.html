@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <title>Great Number Game</title>
+</head>
+<body>
+    <div class="container-fluid d-flex align-items-center justify-content-center">
+        <div class="d-flex-col justify-content-center">
+            <h1 class="text-center">Welcome to the Great Number Game!!!</h1>            
+            <div class="d-flex justify-content-center">
+                <div class="card bg-danger w-50 text-warning">
+                    <div class="card-body">
+                    <h5 class="card-title text-center">Wrong!</h5>
+                    <p class="card-text text-center">Keep guessing!</p>
+                    <div class="d-flex justify-content-center">
+                        <form class="input-group mb-3" action="{{url_for('guess')}}" method="post">
+                            <input type="text" class="form-control" name="user_guess" placeholder="Guess here!"  aria-describedby="basic-addon2" required>
+                            <div class="input-group-append">
+                                <button class="btn bg-primary btn-outline-secondary text-white" type="submit">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>            
+    </div>
+</body>
+</html>
+
