@@ -18,11 +18,11 @@
                         <th>Favorited by:</th>
                     </tr>
                     
-                    <tr>
-                        {% for auth in auths_who_favorited %}
+                    {% for auth in auths_who_favorited %}
+                        <tr>
                             <td>auth</td>
-                        {% endfor %}
-                    </tr>
+                        </tr>
+                    {% endfor %}
                 </table>
                 
             </div>

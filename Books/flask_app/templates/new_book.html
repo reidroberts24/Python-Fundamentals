@@ -11,31 +11,33 @@
 <body>
     <div class="container-fluid d-flex flex-row align-items-start justify-content-center">
         <div class="flex-grow-1">
-            <form action="" method="post" class="p-3 col-6 mx-auto my-5 bg-dark text-light">
+            <form action="/add/book" method="post" class="p-3 col-6 mx-auto my-5 bg-dark text-light">
                 <h2 class="text-center text-primary">New Book</h2>
                 <div class="form-group">
-                    <label for="">Title:</label>
-                    <input type="text" name="" id="" class="form-control" required>
+                    <label for="title">Title:</label>
+                    <input type="text" name="title" id="title" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <label for="">Number of pages:</label>
-                    <input type="text" name="" id="" class="form-control" required>
+                    <label for="num_of_pages">Number of pages:</label>
+                    <input type="text" name="num_of_pages" id="num_of_pages" class="form-control" required>
                 </div>
                 <input type="submit" class="btn btn-primary btn-outline-dark">
             </form>
+            <a href="/" class="btn btn-primary btn-outline-dark">Return Home</a>
+
         </div>
         <div class="list-group flex-grow-1 my-5">
             <button type="button" class="list-group-item list-group-item-action active w-50 bg-dark text-light">
                 All Books
             </button>
-            
-                <form action="" method="get">
-                    <input type="hidden" name="" value="">
-                    <button type="submit" name="" class="list-group-item list-group-item-action w-50 bg-dark text-light">
-                        
-                    </button>
-                </form>
-            
+                {% for book in books %}    
+                    <form action="/book/favorites/{{book.id}}" method="get">
+                        <button type="submit" name="{{book.id}}" class="list-group-item list-group-item-action w-50 bg-dark text-light">
+                            {{book.title}}
+                        </button>
+                    </form>
+                {% endfor %}    
+
         </div>
     </div>
     

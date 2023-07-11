@@ -25,13 +25,15 @@
                 All Authors
             </button>
             
-                <form action="" method="get">
-                    <input type="hidden" name="" value="">
-                    <button type="submit" name="" class="list-group-item list-group-item-action w-50 bg-dark text-light">
-                        
+            {% for auth in auths %}
+                <form action="/author/favorites/{{auth.id}}" method="get">
+                    <button type="submit" name="{{auth.name}}" class="list-group-item list-group-item-action w-50 bg-dark text-light">
+                        {{auth.name}}
                     </button>
                 </form>
+            {% endfor %}
             
+            <a href="/new/book" class="btn btn-primary btn-outline-darks">Add Book</a>
         </div>
     </div>
     
