@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
-    <title>Dojos and Ninjas</title>
+    <title>New Book</title>
 </head>
 <body>
     <div class="container-fluid d-flex flex-row align-items-start justify-content-center">
@@ -26,16 +26,16 @@
         </div>
         <div class="list-group flex-grow-1 my-5">
             <button type="button" class="list-group-item list-group-item-action active w-50 bg-dark text-light">
-                All Authors
+                All Books
             </button>
-            {%  %}
+            
                 <form action="" method="get">
-                    <input type="hidden" name="" value="{{}}">
+                    <input type="hidden" name="" value="">
                     <button type="submit" name="" class="list-group-item list-group-item-action w-50 bg-dark text-light">
-                        {{}}
+                        
                     </button>
                 </form>
-            {%  %}
+            
         </div>
     </div>
     

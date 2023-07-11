@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+    <title>Author Favorites</title>
+</head>
+<body>
+    <div class="container-fluid d-flex flex-row align-items-start justify-content-center">
+        <div class="flex-grow-1">
+            <h2 class="text-center text-primary">Auth_var Favorites:</h2>
+            <div class="form-group">
+                <table class="table">
+                    <tr>
+                        <th>Title</th>
+                        <th># of pages</th>
+                    </tr>
+                    
+                    <tr>
+                        {% for book in auth_favorites %}
+                            <td>title_var</td>
+                            <td>num_pages_var</td>
+                        {% endfor %}
+                    </tr>
+                </table>
+                
+            </div>
+            <a href="/" class="btn btn-primary btn-outline-dark mt-2">Return Home</a>
+        </div>
+        <div class="flex-grow-1">
+            <h2 class="text-center text-primary">Add Auth_var Favorite:</h2>
+            <div class="form-group">
+                <form action="#" method="post" class="p-3 col-6 mx-auto my-5 bg-dark text-light">
+                    <h2 class="text-center text-primary">Add New Dojo:</h2>
+                    <div class="form-group">
+                        <label for="">Book Title:</label>
+                        <select type="text" name="" id="" class="form-control" required>
+                            {% for book in books %}
+                                <option value="book_title_var">book_title_var</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <input type="submit" value="Add Favorite Book" class="btn btn-primary btn-outline-dark">
+                </form>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
+
+ 
