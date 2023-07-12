@@ -44,7 +44,8 @@ class Book:
     @classmethod
     def add_book_fave(cls, data):
         query = '''INSERT INTO favorites (author_id, book_id)
-                    VALUES (%(author_id)s, %(book_id)s);'''
+                    VALUES (%(author_id)s, %(book_id)s)
+                    SELECT LAST_INSERT_ID();''' ## this is so i can redirect to the book's faves page
         return connectToMySQL('books_schema').query_db(query, data)
 
 

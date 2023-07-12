@@ -21,8 +21,9 @@ def add_booK():
         'title': request.form['title'],
         'num_of_pages': request.form['num_of_pages']
     }
-    Book.add_book(data)
-    return redirect('/new/book')
+    
+    book_id = Book.add_book(data)
+    return redirect(f'/book/favorites/{book_id}')
 
 ##### SHOW PAGE WITH THE AUTHORS WHO FAVED THE BOOK #####
 @app.route('/book/favorites/<int:book_id>')
