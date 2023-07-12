@@ -55,3 +55,10 @@ class Author:
             INSERT INTO authors (name, created_at, updated_at)
             VALUES (%(name)s, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());'''
         return connectToMySQL('books_schema').query_db(query, data)
+    
+    ##### ADD AUTHOR #####
+    @classmethod
+    def delete_author(cls, data):
+        query = '''DELETE FROM authors 
+                    WHERE authors.id = %(id)s;'''
+        return connectToMySQL('books_schema').query_db(query, data)

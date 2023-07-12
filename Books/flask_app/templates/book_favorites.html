@@ -11,16 +11,16 @@
 <body>
     <div class="container-fluid d-flex flex-row align-items-start justify-content-center">
         <div class="flex-grow-1">
-            <h2 class="text-center text-primary">Title: Title_var:</h2>
+            <h2 class="text-center text-primary">Title: {{book.title}}:</h2>
             <div class="form-group">
                 <table class="table">
                     <tr>
                         <th>Favorited by:</th>
                     </tr>
                     
-                    {% for auth in auths_who_favorited %}
+                    {% for auth in auths_who_faved %}
                         <tr>
-                            <td>auth</td>
+                            <td>{{auth.name}}</td>
                         </tr>
                     {% endfor %}
                 </table>
@@ -29,15 +29,16 @@
             <a href="/" class="btn btn-primary btn-outline-dark mt-2">Return Home</a>
         </div>
         <div class="flex-grow-1">
-            <h2 class="text-center text-primary">Add Auth_var Favorite:</h2>
             <div class="form-group">
-                <form action="#" method="post" class="p-3 col-6 mx-auto my-5 bg-dark text-light">
+                <form action="/add/book/favorite/{{book.id}}" method="post" class="p-3 col-6 mx-auto my-5 bg-dark text-light">
                     <h2 class="text-center text-primary">Add Book's Favorite:</h2>
                     <div class="form-group">
-                        <label for="">Author:</label>
-                        <select type="text" name="" id="" class="form-control" required>
-                            {% for auth in auths %}
-                                <option value="auth_var">Auth_var</option>
+                        <label for="/add/author/favorite/<int:auth_id>">Author:</label>
+                        <select type="text" name="auth_id" class="form-control" required>
+                            {% for auth in all_auths %}
+                                {% if auth.id not in auth_ids %}
+                                    <option value="{{auth.id}}">{{auth.name}}</option>
+                                {% endif %}
                             {% endfor %}
                         </select>
                     </div>

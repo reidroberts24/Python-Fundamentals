@@ -27,6 +27,26 @@ class Book:
         return cls(book_from_db[0])
     
     ##### GET BOOK'S FAVORITED BY #####
+    @classmethod
+    def get_book_favorites(cls, data):
+        query = '''SELECT * FROM authors
+                    LEFT JOIN favorites ON favorites.author_id = authors.id
+                    LEFT JOIN books ON favorites.book_id = books.id
+                    WHERE books.id = %(id)s;'''
+        results = connectToMySQL('books_schema').query_db(query, data)
+        auth_faves = []
+        for auth in results:
+            auth_faves.append(auth)
+        return auth_faves
+    
+
+    ##### ADD FAVE AUTHOR FOR BOOK #####
+    @classmethod
+    def add_book_fave(cls, data):
+        query = '''INSERT INTO favorites (author_id, book_id)
+                    VALUES (%(author_id)s, %(book_id)s);'''
+        return connectToMySQL('books_schema').query_db(query, data)
+
 
     ##### ADD BOOK #####
     @classmethod

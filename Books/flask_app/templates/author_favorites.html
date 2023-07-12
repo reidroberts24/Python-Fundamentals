@@ -19,27 +19,33 @@
                         <th># of pages</th>
                     </tr>
                     
-                    <tr>
-                        {% for book in faves %}
-                            <td>{{book.title}}</td>
-                            <td>{{book.num_of_pages}}</td>
-                        {% endfor %}
-                    </tr>
+                    {% for book in faves %}
+                        <tr>
+                                <td>{{book.title}}</td>
+                                <td>{{book.num_of_pages}}</td>
+                        </tr>
+                    {% endfor %}
                 </table>
                 
             </div>
-            <a href="/" class="btn btn-primary btn-outline-dark mt-2">Return Home</a>
+            <div class="d-flex justify-content-between">
+                <a href="/" class="btn btn-primary btn-outline-dark mt-2">Return Home</a>
+                <form action="/delete/author/{{auth.id}}" method="post">
+                    <button type="submit" class="btn btn-danger btn-outline-dark mt-2 float-right">
+                        Delete Author
+                    </button>
+                </form>
+            </div>
         </div>
         <div class="flex-grow-1">
-            <h2 class="text-center text-primary">Add {{auth.name}}'s Favorite:</h2>
             <div class="form-group">
                 <form action="/add/author/favorite/{{auth.id}}" method="post" class="p-3 col-6 mx-auto my-5 bg-dark text-light">
-                    <h2 class="text-center text-primary">Add New Dojo:</h2>
+                    <h2 class="text-center text-primary">Add to {{auth.name}}'s Favorites:</h2>
                     <div class="form-group">
                         <label for="">Book Title:</label>
                         <select type="text" name="book_id" class="form-control" required>
                             {% for book in all_books %}
-                                {% if book not in faves %}
+                                {% if book.id not in fave_ids %}
                                     <option value="{{book.id}}">{{book.title}}</option>
                                 {% endif %}
                             {% endfor %}

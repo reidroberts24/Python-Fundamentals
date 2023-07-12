@@ -34,19 +34,33 @@ def author_favorites():
 def show_auth_favorites(auth_id):
     author = Author.get_single_auth({'id': auth_id})
     faves = author.get_auth_favorites({'id': auth_id})
+    fave_ids = []
+    for book in faves:
+        fave_ids.append(book['id'])
     books = Book.get_all_books()
-    return render_template('author_favorites.html', auth=author, all_books=books, faves=faves)
+    return render_template('author_favorites.html', auth=author, all_books=books, faves=faves, fave_ids=fave_ids)
 
-
+##### ADD BOOK TO AUTHOR'S FAVORITES #####
 @app.route('/add/author/favorite/<int:auth_id>', methods=["POST"])
 def add_author_favorite(auth_id):
-    book_id = request.form['book_id']
     author = Author.get_single_auth({'id':auth_id})
     data = {
         'author_id': auth_id,
-        'book_id': book_id
+        'book_id': request.form['book_id']
     }
     author.add_auth_favorite(data)
     return redirect(f'/author/favorites/{auth_id}')
 
-    
+
+########### ADDED DELETE AUTHOR METHOD BUT ONLY WORKS FOR AUTHS WITHOUT
+# RELATIONSHIPS TO OTHER TABLES
+# DIDN'T HAVE TIME TO FINISH OUT THE FUNCTIONALITY
+# STUDYING TO ACE THE EXAM
+
+@app.route('/delete/author/<int:auth_id>', methods=["POST"])
+def delete_author(auth_id):
+    data = {
+        'id': auth_id
+    }
+    Author.delete_author(data)
+    return redirect('/')
