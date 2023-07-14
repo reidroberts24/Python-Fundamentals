@@ -5,6 +5,7 @@ from flask import flash
 class User:
     DB = "login_and_registration_schema"
     def __init__(self,data):
+        self.id = data['id']
         self.first_name = data['first_name']
         self.last_name = data['last_name']
         self.email = data['email']
@@ -14,10 +15,16 @@ class User:
 
     @classmethod
     def get_user(cls, data):
+        query = '''SELECT * FROM users WHERE email = %(email)s'''
+        user = connectToMySQL(cls.DB).query_db(query, data)
+        return cls(user[0])
+    
+    @classmethod
+    def get_user_by_id(cls, data):
         query = '''SELECT * FROM users WHERE id = %(id)s'''
         user = connectToMySQL(cls.DB).query_db(query, data)
         return cls(user[0])
-
+    
     @classmethod
     def save(cls, data):
         query = '''INSERT INTO users (first_name, last_name, email, password)
@@ -30,7 +37,6 @@ class User:
         is_valid = True
         name_pattern = r'^[a-zA-Z]+$'
         email_pattern = r'^[\w\.-]+@[\w\.-]+\.\w+$'
-
         query = '''SELECT email FROM users WHERE email = %(email)s;'''
         results = connectToMySQL(User.DB).query_db(query, user)
 
