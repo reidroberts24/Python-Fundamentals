@@ -3,6 +3,8 @@ from flask_app import app
 from flask import Flask,render_template,redirect,request, session, flash
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
+# for clearing browser cache so someone can't use back button to go back to the welcome dashboard
+from flask import make_response
 
 @app.route('/')
 def root():
@@ -45,7 +47,13 @@ def welcome():
         'id': session['user_id']
     }
     user = User.get_user_by_id(data)
-    return render_template('welcome_page.html', user=user)
+
+    # for clearing browser cache so someone can't use back button to go back to the welcome dashboard
+    response = make_response(render_template('welcome_page.html', user=user))
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate, public, max-age=0"
+    response.headers["Expires"] = '0'
+    response.headers["Pragma"] = "no-cache"
+    return response
 
 @app.route('/logout')
 def logout():
