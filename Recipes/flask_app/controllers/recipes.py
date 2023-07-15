@@ -14,6 +14,8 @@ def new_recipe():
 ############## SHOW RECIPE ##############
 @app.route('/show/recipe/<int:recipe_id>')
 def show_recipe(recipe_id):
+    if 'user_id' not in session:
+        return redirect('logout')
     rcp = Recipe.get_rcp_by_id({'id':recipe_id})
     rcp_creator = User.get_user_by_id({'id':rcp.user_id})
     user = User.get_user_by_id({'id':session['user_id']})
@@ -54,6 +56,8 @@ def update_rcp():
 ############## ADD RECIPE ##############
 @app.route('/add/recipe', methods=["POST"])
 def add_rcp():
+    if 'user_id' not in session:
+        return redirect('logout')
     if not Recipe.validate_rcp(request.form):
         return redirect('/new/recipe')
     is_under_30 = request.form['under_30']
@@ -77,5 +81,7 @@ def add_rcp():
 ############## DELETE RECIPE ##############
 @app.route('/delete/recipe/<int:recipe_id>')
 def delete_rcp(recipe_id):
+    if 'user_id' not in session:
+        return redirect('logout')
     Recipe.delete_rcp({'id':recipe_id})
     return redirect('/dashboard')
