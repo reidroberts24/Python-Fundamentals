@@ -10,54 +10,53 @@
 </head>
 <body>
     <div class="d-flex justify-content-between align-items-center p-3">
-        <h1 class="text-primary">Edit {{rcp.name}}!</h1>
+        <h1 class="text-primary">Add a new recipe!</h1>
         <div>
             <a href="/dashboard" class="btn btn-primary">Back to Recipes</a>
-            <button type="submit" class="btn btn-danger">Logout</button>
+            <a href="/logout" class="btn btn-danger">Logout</a>
         </div>
     </div>
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <form action="/update/recipe" method="post" class="p-3 bg-dark text-light">
-                <!-- prepoulate form info -->
-                <!-- same validations as create method -->
-                <!-- redirect flash error messages -->
-                <!-- user must be logged in to see this page (session? put user id ) -->
-                <input type="hidden" name="id" value="{{ rcp.id }}">
+                <form action="/add/recipe" method="post" class="p-3 bg-dark text-light">
+                    {% with messages = get_flashed_messages(category_filter=['create']) %}
+                        {% if messages %}
+                            {% for msg in messages %}
+                            <p class="text-warning">* {{msg}}</p>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
                     <div class="form-group">
                         <label for="rcp_name">Recipe Name:</label>
-                        <input type="text" name="rcp_name" id="rcp_name" class="form-control" value="{{rcp.name}}">
+                        <input type="text" name="rcp_name" id="rcp_name" class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="description">Description:</label>
-                        <textarea class="form-control" name="description" id="description" rows="3">{{rcp.description}}</textarea>
+                        <textarea class="form-control" name="description" id="description" rows="3"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="instructions">Instructions:</label>
-                        <textarea class="form-control" name="instructions" id="instructions" rows="4">{{rcp.instructions}}</textarea>
+                        <textarea class="form-control" name="instructions" id="instructions" rows="4"></textarea>
                     </div>
                 </div>
             <div class="col-md-6 p-3 bg-dark text-light">
                     <div class="form-group">
                         <label for="date_added">Date Cooked/Made:</label>
-                        <input type="datetime-local" id="date_added" name="date_added" class="form-control" value="{{rcp.created_at}}">
+                        <input type="datetime-local" id="date_added" name="date_added" class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="under_30">Under 30 minutes?</label>
                         <div class="form-check">
-                            <input type="radio" name="under_30" id="yes" value="yes" class="form-check-input" 
-                            {% if rcp.is_under_30_mins == 1 %} checked {% endif %}>
+                            <input type="radio" name="under_30" id="yes" value="yes" class="form-check-input">
                             <label for="yes" class="form-check-label">Yes</label>
                         </div>
                         <div class="form-check">
-                            <input type="radio" name="under_30" id="no" value="no" class="form-check-input"
-                            {% if rcp.is_under_30_mins == 0 %} checked {% endif %}>
+                            <input type="radio" name="under_30" id="no" value="no" class="form-check-input">
                             <label for="no" class="form-check-label">No</label>
                         </div>
                     </div>
-                    <!-- redirect to recipes dashboard after submit -->
-                    <input type="submit" class="btn btn-primary" value="Update Recipe">
+                    <input type="submit" class="btn btn-primary" value="Add Recipe">
                 </form>
             </div>
         </div>

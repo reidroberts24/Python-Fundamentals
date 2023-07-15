@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+    <title>Show Recipe</title>
+</head>
+<body>
+    <div class="d-flex justify-content-between align-items-center p-3">
+        <h1 class="text-primary">Welcome, {{user.first_name}}!</h1>
+        <div>
+            <a href="/dashboard" class="btn btn-primary">Back to Recipes</a>
+            <button type="submit" class="btn btn-danger">Logout</button>
+        </div>
+    </div>
+    <div class="container d-flex justify-content-center">
+        <div class="card w-100 d-flex">
+            
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="card-title">{{rcp.name}}</h5>
+                    <p>Posted By: {{posted_by.first_name}}</p>
+                </div>
+
+                <h6 class="card-subtitle mb-2 ml-2 text-muted">Description:</h6>
+                <p class="card-text ml-4">{{rcp.description}}</p>
+                <h6 class="card-subtitle mb-2 text-muted ml-2">Instructions:</h6>
+                <p class="card-text ml-4">{{rcp.instructions}}</p>
+                <h6 class="card-subtitle mb-2 text-muted ml-2">Under 30 minutes to make?:</h6>
+                {% if rcp.is_under_30 == 1 %}
+                    <p class="card-text ml-4">Yes</p>
+                {% elif rcp.is_under_30 == 0 %}
+                    <p class="card-text ml-4">No</p>
+                {% endif %}
+                <h6 class="card-subtitle mb-2 text-muted ml-2">Date Made:</h6>
+                <p class="card-text ml-4">{{rcp.created_at}}</p>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

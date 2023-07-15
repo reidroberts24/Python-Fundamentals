@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+    <title>User Dashboard</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-primary mx-auto">Welcome, {{user.first_name}}!</h1>
+        <div class="d-flex justify-content-between align-items-center">
+            <h3>All posted recipes:</h3>
+            <div class="d-flex-row">
+                <!-- renders 'create' page-->
+                <a href="/new/recipe" class="btn btn-primary">+ Create</a>
+                <!-- clears user session, redirects to login page-->
+                <a href="/logout" class="btn btn-danger">Logout</a>
+            </div>
+        </div>
+        <table class="table">
+            <tr>
+                <th>Name</th>
+                <th>Under 30 Minutes?</th>
+                <th>Posted By</th>
+                <th>Actions</th>
+            </tr>
+
+            {% for rcp in recipes %}
+                <tr>
+                    <td>{{rcp.name}}</td>
+                    <td>
+                        {% if rcp.is_under_30_mins == 1%}
+                        Yes
+                        {% else %}
+                        No
+                        {% endif %}
+                    </td>
+                    <td>{{rcp.first_name}}</td>
+                    <td>
+                        <a href="/show/recipe/{{rcp.id}}" class="btn btn-primary">View {{rcp.name}}</a> 
+                        {% if session.user_id == rcp.user_id %}
+                            <a href="/edit/recipe/{{rcp.id}}" class="btn btn-primary">Edit {{rcp.name}}</a> 
+                            <a href="/delete/recipe/{{rcp.id}}" class="btn btn-danger">Delete {{rcp.name}}</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            <!-- view link brings up recipe card -->
+            <!-- edit and delete only show if this user posted the recipe-->
+            <!-- edit link renders edit page (prepoulated recipe info)-->
+            <!-- delete redirects back to this page and removes recipe-->
+
+
+
+        </table>
+    </div>
+</body>
+</html>
